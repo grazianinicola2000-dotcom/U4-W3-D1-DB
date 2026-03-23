@@ -32,4 +32,23 @@ WHERE iva = 20
 GROUP BY EXTRACT(YEAR FROM data_fattura) 
 
 ESERCIZIO 8
+SELECT EXTRACT(YEAR FROM data_fattura) AS anno, SUM(importo) AS importo_totale , COUNT(*) FROM fatture 
+WHERE iva = 20
+GROUP BY EXTRACT(YEAR FROM data_fattura) 
 
+ESERCIZIO 9
+SELECT EXTRACT(YEAR FROM data_fattura) AS anno FROM fatture 
+WHERE tipologia = 'A'
+GROUP BY EXTRACT(YEAR FROM data_fattura)
+HAVING COUNT(*) > 2
+
+ESERCIZIO 10
+SELECT clienti.regione_residenza, SUM(importo) FROM fatture 
+JOIN clienti on fatture.id_cliente = clienti.numero_cliente
+GROUP BY clienti.regione_residenza
+
+ESERCIZIO 11
+SELECT COUNT(DISTINCT clienti.numero_cliente) FROM fatture 
+JOIN clienti on fatture.id_cliente = clienti.numero_cliente
+WHERE importo > 50 
+AND anno_di_nascita = 1980
